@@ -94,23 +94,23 @@ class RestauranteRepository(
         mesaDao.insertarMesas(MesaEntity(id = 6, numero = "Mesa 6", comensales = 0, isOpen = false, forma = FormaMesa.REDONDA_CUATRO_ASIENTOS))
 
         // platos entrantes
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Hummus de Berenjena", precio = 8.99, categoriaId = 1))
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Focaccia Pomodori e Burrata", precio = 10.99, categoriaId = 1))
+        platoDao.insertarPlatos(PlatoEntity(id = 1, nombre = "Hummus de Berenjena", precio = 8.99, categoriaId = 1))
+        platoDao.insertarPlatos(PlatoEntity(id = 2, nombre = "Focaccia Pomodori e Burrata", precio = 10.99, categoriaId = 1))
         // platos ensaladas
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Cesar Romana", precio = 12.99, categoriaId = 2))
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Ventresca e Mandorle", precio = 10.99, categoriaId = 2))
+        platoDao.insertarPlatos(PlatoEntity(id = 3, nombre = "Cesar Romana", precio = 12.99, categoriaId = 2))
+        platoDao.insertarPlatos(PlatoEntity(id = 4, nombre = "Ventresca e Mandorle", precio = 10.99, categoriaId = 2))
         // platos pizzas
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Capriccio de Higo y Cabra", precio = 12.99, categoriaId = 3))
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Pergamino di Porchetta", precio = 14.99, categoriaId = 3))
+        platoDao.insertarPlatos(PlatoEntity(id = 5, nombre = "Capriccio de Higo y Cabra", precio = 12.99, categoriaId = 3))
+        platoDao.insertarPlatos(PlatoEntity(id = 6, nombre = "Pergamino di Porchetta", precio = 14.99, categoriaId = 3))
         // platos pastas
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Gnocchi molto molto gorgonzola con jamón ibérico", precio = 11.99, categoriaId = 4))
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Spaghetti Carbonara trufada", precio = 12.99, categoriaId = 4))
+        platoDao.insertarPlatos(PlatoEntity(id = 7, nombre = "Gnocchi molto molto gorgonzola con jamón ibérico", precio = 11.99, categoriaId = 4))
+        platoDao.insertarPlatos(PlatoEntity(id = 8, nombre = "Spaghetti Carbonara trufada", precio = 12.99, categoriaId = 4))
         // platos postres
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Tiramisú", precio = 7.99, categoriaId = 5))
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Panna-COCO-tta", precio = 5.99, categoriaId = 5))
+        platoDao.insertarPlatos(PlatoEntity(id = 9, nombre = "Tiramisú", precio = 7.99, categoriaId = 5))
+        platoDao.insertarPlatos(PlatoEntity(id = 10, nombre = "Panna-COCO-tta", precio = 5.99, categoriaId = 5))
         // bebidas
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Estrella Galicia 1/3", precio = 2.99, categoriaId = 6))
-        platoDao.insertarPlatos(PlatoEntity(nombre = "Estrella Galicia 0,0", precio = 4.99, categoriaId = 6))
+        platoDao.insertarPlatos(PlatoEntity(id = 11, nombre = "Estrella Galicia 1/3", precio = 2.99, categoriaId = 6))
+        platoDao.insertarPlatos(PlatoEntity(id = 12, nombre = "Estrella Galicia 0,0", precio = 4.99, categoriaId = 6))
 
 
 
