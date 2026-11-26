@@ -5,10 +5,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -22,6 +25,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -100,7 +104,8 @@ fun PedidoScreen(
         ) {
             // Menú lateral izquierdo con opcion de cada catedoria
             NavigationRail(
-                containerColor = colorBase.copy(alpha = 0.15f)
+                containerColor = colorBase,
+                windowInsets = WindowInsets(0,0,0,0)
             ) {
                 categorias.forEach { categoria ->
                     NavigationRailItem(
@@ -109,10 +114,19 @@ fun PedidoScreen(
                         icon = {
                             Icon(
                                 painter = painterResource(id = iconoCategoria(categoria.id)),
-                                contentDescription = categoria.nombre
+                                contentDescription = categoria.nombre,
+                                modifier = Modifier.size(28.dp)
                             )
                         },
-                        label = { Text(categoria.nombre) }
+                        label = { Text(categoria.nombre) },
+                        colors = NavigationRailItemDefaults.colors(
+                            indicatorColor = Color.White,
+                            selectedIconColor = colorBase,
+                            selectedTextColor = Color.White,
+                            // Pestañas no seleccionadas: blanco un poco apagado
+                            unselectedIconColor = Color.White.copy(alpha = 0.7f),
+                            unselectedTextColor = Color.White.copy(alpha = 0.7f)
+                        )
                     )
                 }
             }
@@ -151,10 +165,9 @@ fun TarjetaPlato(
     Card(
         onClick = onClick,
         modifier = Modifier
-            .fillMaxWidth()
-            .height(120.dp),
+            .fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = colorBase.copy(alpha = 0.15f))
+        colors = CardDefaults.cardColors(colorResource(R.color.restosycn_primary))
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             // La idea es que la imagen ocupe el espacio que deja el texto
@@ -164,7 +177,7 @@ fun TarjetaPlato(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .aspectRatio(1f)
             )
             // Textos con nombre y precio
             Column(
