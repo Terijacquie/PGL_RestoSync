@@ -6,6 +6,7 @@ import com.example.pgl_restosync.Model.Local.CategoriaEntity
 import com.example.pgl_restosync.Model.Local.ComandaDao
 import com.example.pgl_restosync.Model.Local.ComandaDetalleEntity
 import com.example.pgl_restosync.Model.Local.ComandaEntity
+import com.example.pgl_restosync.Model.Local.FormaMesa
 import com.example.pgl_restosync.Model.Local.MesaDao
 import com.example.pgl_restosync.Model.Local.MesaEntity
 import com.example.pgl_restosync.Model.Local.PlatoDao
@@ -84,12 +85,13 @@ class RestauranteRepository(
         categoriaDao.insertarCategorias(CategoriaEntity(id = 6, nombre = "Bebidas"))
 
         // mesas
-        mesaDao.insertarMesas(MesaEntity(id = 1, numero = "Mesa 1", comensales = 0, isOpen = false))
-        mesaDao.insertarMesas(MesaEntity(id = 2, numero = "Mesa 2", comensales = 0, isOpen = false))
-        mesaDao.insertarMesas(MesaEntity(id = 3, numero = "Mesa 3", comensales = 0, isOpen = false))
-        mesaDao.insertarMesas(MesaEntity(id = 4, numero = "Mesa 4", comensales = 0, isOpen = false))
-        mesaDao.insertarMesas(MesaEntity(id = 5, numero = "Mesa 5", comensales = 0, isOpen = false))
-        mesaDao.insertarMesas(MesaEntity(id = 6, numero = "Mesa 6", comensales = 0, isOpen = false))
+        // Nuevo cambio: añadido el campo "forma"
+        mesaDao.insertarMesas(MesaEntity(id = 1, numero = "Mesa 1", comensales = 0, isOpen = false, forma = FormaMesa.CUADRADA))
+        mesaDao.insertarMesas(MesaEntity(id = 2, numero = "Mesa 2", comensales = 0, isOpen = false, forma = FormaMesa.REDONDA_CUATRO_ASIENTOS))
+        mesaDao.insertarMesas(MesaEntity(id = 3, numero = "Mesa 3", comensales = 0, isOpen = false, forma = FormaMesa.REDONDA_CINCO_ASIENTOS))
+        mesaDao.insertarMesas(MesaEntity(id = 4, numero = "Mesa 4", comensales = 0, isOpen = false, forma = FormaMesa.RECTANGULAR))
+        mesaDao.insertarMesas(MesaEntity(id = 5, numero = "Mesa 5", comensales = 0, isOpen = false, forma = FormaMesa.CUADRADA))
+        mesaDao.insertarMesas(MesaEntity(id = 6, numero = "Mesa 6", comensales = 0, isOpen = false, forma = FormaMesa.REDONDA_CUATRO_ASIENTOS))
 
         // platos entrantes
         platoDao.insertarPlatos(PlatoEntity(nombre = "Hummus de Berenjena", precio = 8.99, categoriaId = 1))

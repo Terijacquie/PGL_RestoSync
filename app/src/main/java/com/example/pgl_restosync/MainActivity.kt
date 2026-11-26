@@ -11,8 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.pgl_restosync.Model.Local.AppDatabase
+import com.example.pgl_restosync.Model.RestauranteRepository
 import com.example.pgl_restosync.View.HomeScreen
 import com.example.pgl_restosync.View.PantallaInicio
+import com.example.pgl_restosync.ViewModel.ViewModelRestaurante
 import com.example.pgl_restosync.ui.theme.PGL_RestoSyncTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,11 +27,21 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PGL_RestoSyncTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                val viewModel: ViewModelRestaurante = viewModel(
+                    factory = viewModelFactory {
+                        initializer {
+                            val db = AppDatabase.getDatabase(applicationContext)
+                            val repository = RestauranteRepository(
+                                db.mesaDao(), db.categoriaDao(), db.platoDao(), db.comandaDao()
+                            )
+                            ViewModelRestaurante(repository)
+                        }
+                    }
+                )
+                HomeScreen(
+                    viewModel = viewModel,
+                    onMesaAbierta = { mesaId -> /*ALL*/ }
+                )
             }
         }
     }

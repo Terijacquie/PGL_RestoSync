@@ -29,7 +29,7 @@ interface ComandaDao {
     // Esta es la consulta más larga
     @Query(
         """
-        SELECT p.nombre AS platoNombre, p.precio, d.cantidad
+        SELECT d.id AS id, p.nombre AS platoNombre, p.precio, d.cantidad
         FROM comanda_detalle d
         INNER JOIN comandas c ON d.comandaId = c.id
         INNER JOIN platos p ON d.platoId = p.id

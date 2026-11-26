@@ -4,9 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pgl_restosync.Model.Local.CategoriaEntity
 import com.example.pgl_restosync.Model.Local.MesaEntity
+import com.example.pgl_restosync.Model.Local.PlatoEntity
 import com.example.pgl_restosync.Model.RestauranteRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -49,7 +53,7 @@ class ViewModelRestaurante(
     //3. Abrir la mesa. Actualiza el estado, guarda los comensales y crea la comanda
     fun abrirMesa(mesaId: Int, comensales: Int) {
         viewModelScope.launch {
-            repository.actualizarEstadoMesa(mesaId, true, comensales)
+            //repository.actualizarEstadoMesa(mesaId, true, comensales)
             repository.abrirMesa(mesaId, comensales)
         }
     }
@@ -61,17 +65,35 @@ class ViewModelRestaurante(
         }
     }
 
-    // nuevo : 26/11/26
+    // 5. nuevo : 26/11/26
     fun cerrarMesa(mesaId: Int) {
         viewModelScope.launch {
             repository.cerrarMesa(mesaId)
         }
     }
 
-    //5. Elimina un plato del detalle de la comanda (lista)
+    //6. Elimina un plato del detalle de la comanda (lista)
     fun eliminarDetalleComanda(detalleId: Int) {
         viewModelScope.launch {
             repository.eliminarDetalleComanda(detalleId)
         }
+    }
+
+    // 7. Ctargoria seleccionada en el menu izquierdo, empezando en entrantes (id 1)
+    private val _categoriaSeleccionada = MutableStateFlow(1)
+    val categoriaSeleccionada: StateFlow<Int> = _categoriaSeleccionada
+
+    //8. Platos de cada categoria, deben de cambiar solos al cambiar de categoria
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val platos: StateFlow<List<PlatoEntity>> = _categoriaSeleccionada
+        .flatMapLatest { categoriaId -> repository.obtenerPlatosPorCategoria(categoriaId) }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
+
+    fun seleccionarCategoria(categoriaId: Int) {
+        _categoriaSeleccionada.value = categoriaId
     }
 }
