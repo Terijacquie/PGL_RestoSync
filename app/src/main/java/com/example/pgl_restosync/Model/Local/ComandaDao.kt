@@ -13,8 +13,17 @@ data class AuxiliarDetalleComanda(
     val cantidad: Int
 )
 
+// Para pintar la card en la lista de comandas (27/11/2026)
+data class ResumenComanda(
+    val comandaId : Int,
+    val mesaId: Int,
+    val numeroMesa: String,
+    val isActiva: Boolean
+)
+
 @Dao
 interface ComandaDao {
+
     // 1. Creamos la cabecera de la comanda
     // Room (SQLite) pide que se devuelva un Long por norma general porque SQLite
     // devuelve a Room este tipo de dato, asi que exigen que se retorne este tipo de dato
@@ -53,5 +62,24 @@ interface ComandaDao {
     // 2. Cierra la comanda: no se borra, se queda como histórico
     @Query("UPDATE comandas SET isActiva = 0 WHERE mesaId = :mesaId AND isActiva = 1")
     suspend fun cerrarComandaActiva(mesaId: Int)
+
+    //27/11/2026
+    // Query de consulta de comandas con el nombre de su mesa con JOIN. Primero ponemos las activas y luego las recientes.
+    @Query("""
+        SELECT c.id AS comandaID,
+        c.mesaId AS mesaId,
+        m.numero AS numeroMesa,
+        c.isActiva AS isActiva
+        FROM comandas c
+        INNER JOIN mesas m ON c.mesaId = m.id
+        ORDER BY c.isActiva DESC, c.id DESC
+    """
+    )
+    fun obtenerResumenComandas(): Flow<List<ResumenComanda>>
+
+    //query para boorar comanda. Las lineas del detalle se borran solas por el CASCADE
+    @Query("DELETE FROM comandas WHERE id = :comandaId")
+    suspend fun borrarComanda(comandaId: Int)
+
 
 }

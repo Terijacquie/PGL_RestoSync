@@ -22,4 +22,5 @@ interface MesaDao {
 
     @Query("DELETE FROM mesas")
     suspend fun deleteAllMesas()
+
 }

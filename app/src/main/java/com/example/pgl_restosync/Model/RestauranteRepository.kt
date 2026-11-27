@@ -11,6 +11,7 @@ import com.example.pgl_restosync.Model.Local.MesaDao
 import com.example.pgl_restosync.Model.Local.MesaEntity
 import com.example.pgl_restosync.Model.Local.PlatoDao
 import com.example.pgl_restosync.Model.Local.PlatoEntity
+import com.example.pgl_restosync.Model.Local.ResumenComanda
 import kotlinx.coroutines.flow.Flow
 
 class RestauranteRepository(
@@ -72,6 +73,18 @@ class RestauranteRepository(
         categoriaDao.deleteAllCategorias()
         platoDao.deleteAllPlatos()
         //comandaDao.deleteAllComandaDetalle()
+    }
+
+    //27/11/2026
+    // Lista de comandas para la pantalla del resumen
+    val resumenComanda: Flow<List<ResumenComanda>> = comandaDao.obtenerResumenComandas()
+
+    // Si la comanda estaba activa, la mesa se queda libre de nuevo
+    suspend fun eliminarComanda(comanda: ResumenComanda) {
+        comandaDao.borrarComanda(comanda.comandaId)
+        if(comanda.isActiva){
+            mesaDao.actualizarEstadoMesa(comanda.mesaId, false, 0)
+        }
     }
 
     // En la siguiente sección, voy a hacer las inserciones necesarias

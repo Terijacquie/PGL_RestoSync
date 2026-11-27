@@ -3,8 +3,10 @@ package com.example.pgl_restosync.ViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pgl_restosync.Model.Local.CategoriaEntity
+import com.example.pgl_restosync.Model.Local.ComandaEntity
 import com.example.pgl_restosync.Model.Local.MesaEntity
 import com.example.pgl_restosync.Model.Local.PlatoEntity
+import com.example.pgl_restosync.Model.Local.ResumenComanda
 import com.example.pgl_restosync.Model.RestauranteRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -95,5 +97,20 @@ class ViewModelRestaurante(
 
     fun seleccionarCategoria(categoriaId: Int) {
         _categoriaSeleccionada.value = categoriaId
+    }
+
+    // 27/11/2026. 9. Lista de comandas con el nombre de la mesa
+    val resumenComandas: StateFlow<List<ResumenComanda>> = repository.resumenComanda
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
+
+    // 10. Eliminar una comanda por si se equivocaron o los comensales se cambiaron de mesa
+    fun eliminarComanda(comanda: ResumenComanda) {
+        viewModelScope.launch {
+            repository.eliminarComanda(comanda)
+        }
     }
 }
