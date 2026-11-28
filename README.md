@@ -10,7 +10,8 @@
 ## 📋 Índice
  
 - [Funcionalidades](#-funcionalidades)
-- [Capturas de pantalla](#-capturas-de-pantalla)
+- [Alcance implementado respecto a los mockups](#-alcance-implementado-respecto-a-los-mockups)
+- [Capturas comparativas](#-capturas-comparativas)
 - [Tecnologías](#️-tecnologías)
 - [Arquitectura](#️-arquitectura)
 - [Base de datos](#️-base-de-datos)
@@ -31,16 +32,57 @@
 - **Cerrar sesión** desde la pantalla de mesas.
 ---
  
-## 📸 Capturas de pantalla
- 
-| Inicio de sesión | Mesas | Elección de platos |
-|:---:|:---:|:---:|
-| <img src="capturas/Inicio.png" width="230"/> | <img src="capturas/Home.png" width="230"/> | <img src="capturas/Pedido.png" width="230"/> |
+## 🎯 Alcance implementado respecto a los mockups
 
-| Resumen de comandas | Detalle de la comanda |
-|:---:|:---:|
-| <img src="capturas/Resumen.png" width="230"/> | <img src="capturas/Detalle.png" width="230"/> |
- 
+En la UT1 se diseñaron tres pantallas (disponibles en `capturas/Mockups`): **inicio de sesión**, **gestión de mesas** y **toma de comanda**. Implementé las tres y añadí **dos pantallas nuevas** que surgieron al llevar el diseño a un flujo de trabajo real, basándome en la identidad corporativa de "La famiglia se sienta a la mesa".
+
+| Pantalla | Estado | Implementado | Cambios respecto al mockup |
+|---|:---:|---|---|
+| **Inicio de sesión** | 🟡 Con cambios | Logo, campos de usuario y contraseña con iconos (`OutlinedTextField`) y botón de acceso, sobre el fondo difuminado del restaurante. | El acceso es simulado: no valida credenciales. No se incluyen el botón para mostrar la contraseña ni el enlace *"¿Has olvidado tu contraseña?"*. |
+| **Gestión de mesas** | 🟡 Con cambios | Cuadrícula de mesas en dos columnas generada desde Room, icono según la forma de cada mesa, estado (libre o abierta con sus comensales) y barra inferior de navegación. | Sin buscador, sin botón flotante **+** y sin fecha ni importe en las tarjetas. Los iconos representan la forma de la mesa en lugar del tipo de servicio. La barra inferior se reduce a **Mesas** y **Comandas** (Historial y Pedidos se unifican en Comandas, y Configuración queda fuera del MVP). Se añade un botón para cerrar sesión. |
+| **Toma de comanda** | 🟡 Con cambios | Barra superior con la mesa, los comensales y el botón de volver; menú lateral de categorías con iconos; cuadrícula de platos con foto, nombre y precio. | Sin subpestañas dentro de cada categoría (Primeros, Segundos…) ni botón de enviar a cocina. El resumen y el total de la comanda, que en el mockup aparecían debajo de los platos, pasan a una pantalla propia (**Detalle**) para dejar todo el espacio a la carta. |
+| **Resumen de comandas** | 🆕 Nueva | Lista de comandas con su mesa y su estado (activa o cerrada) y opción de eliminarlas. | No aparecía en los mockups. |
+| **Detalle de la comanda** | 🆕 Nueva | Platos agrupados por cantidad, subtotal, total de la cuenta, eliminación de unidades y botón **+** para seguir pidiendo. | Sustituye al resumen que el mockup mostraba en la pantalla de toma de comanda. |
+
+**Estética:** se mantienen el logo, el fondo difuminado del restaurante y la estructura de las pantallas. La paleta pasa del marrón oscuro y el granate del mockup a tonos beige y dorados.
+
+**Por qué estos cambios:** el objetivo era entregar una app funcional con todo el flujo del camarero (entrar, abrir mesa, pedir, revisar la cuenta), así que se priorizó que ese recorrido funcionara de principio a fin con datos reales de Room. 
+Algunas decisiones vinieron de la práctica: al montar la pantalla de pedido, la lista de platos y el resumen no cabían cómodamente juntos, y separarlos en dos pantallas resultó más claro. Las funciones secundarias (buscador, historial, configuración, envío a cocina) quedan como mejoras futuras.
+
+Cabe destacar que, en la gran mayoría de los proyectos, ocurren cambios que terminan pareciendo muy lejanos a la idea teórica del proyecto. Fueron surgiendo más ideas respecto a las funcionalidades basándome en mi experiencia como camarera; por tanto, era más que necesario añadir más pantallas.
+
+Por falta de tiempo, me hubiese gustado que quedara más elegante y mucho más funcional, ya que hay cosas que mejorar respecto a la nevagación para que sea más cómodo para el usuario, cosa que planeo hacer en un futuro con el proyecto intermodular.
+
+---
+
+## 📸 Capturas comparativas
+
+Comparación entre los mockups de la UT1 y la app real, ejecutada en **dos emuladores (AVD) distintos: Pixel 10 y Pixel 6**.
+
+### Inicio de sesión
+
+| Mockup UT1 | App · Pixel 10 | App · Pixel 6 |
+|:---:|:---:|:---:|
+| <img src="capturas/Mockups/Mockup%20de%20proyecto%201%20-%20inicio%20de%20sesi%C3%B3n.jpg" width="230"/> | <img src="capturas/Inicio.png" width="230"/> | <img src="capturas/Inicio_Pixel6.png" width="230"/> |
+
+### Gestión de mesas
+
+| Mockup UT1 | App · Pixel 10 | App · Pixel 6 |
+|:---:|:---:|:---:|
+| <img src="capturas/Mockups/Mockup_Mesas.jpg" width="230"/> | <img src="capturas/Home.png" width="230"/> | <img src="capturas/Home_Pixel6.png" width="230"/> |
+
+### Toma de comanda
+
+| Mockup UT1 | App · Pixel 10 | App · Pixel 6 |
+|:---:|:---:|:---:|
+| <img src="capturas/Mockups/Mockup_Pedido.jpg" width="230"/> | <img src="capturas/Pedido.png" width="230"/> | <img src="capturas/Pedido_Pixel6.png" width="230"/> |
+
+### Pantallas nuevas (sin mockup)
+
+| Resumen · Pixel 10 | Resumen · Pixel 6 | Detalle · Pixel 10 | Detalle · Pixel 6 |
+|:---:|:---:|:---:|:---:|
+| <img src="capturas/Resumen.png" width="180"/> | <img src="capturas/Resumen_Pixel6.png" width="180"/> | <img src="capturas/Detalle.png" width="180"/> | <img src="capturas/Detalle_Pixel6.png" width="180"/> |
+
 ---
  
 ## 🛠️ Tecnologías
@@ -102,6 +144,9 @@ app/src/main/java/com/example/pgl_restosync/
 - `ViewModelRestaurante` se crea en `MainActivity` y se comparte entre las pantallas principales.
 - `DetalleComandaViewModel` se crea dentro de la ruta del detalle, por lo que solo vive mientras esa pantalla está abierta. Gestiona su estado con un `sealed interface` (`DetalleUiState`).
 - Ambos se crean mediante su **Factory**, que recibe el repositorio guardado en `RestoSyncApp`.
+
+**Resources string.xml:** los títulos de las barras superiores y los textos largos de la interfaz están en `res/values/strings.xml` y se leen con `stringResource()`
+
 ### 🔄 Detalle técnico: cambio de categoría con `flatMapLatest`
 **Imporatante: lo puse a parte porque quise que fuese más específico y, aunque la estructura la ideé yo, lo cierto es que a la hora de llevarla a cabo, tuve que consultar a Claude para saber exactamente que debía conectar con qué para que funcionara, ya que cuando lo hice, no funcionaba como yo pensaba que era. 
  
@@ -273,6 +318,7 @@ Image(
 - **`aspectRatio(1f)`** fija la proporción **ancho : alto = 1 : 1**, es decir, la foto es tan alta como ancha, sea cual sea el tamaño de la pantalla. Con `1.3f` sería más ancha que alta.
 - **`ContentScale.Crop`** rellena ese cuadrado sin deformar la imagen, recortando solo lo que sobre. Como las fotos originales ya son casi cuadradas, se ven prácticamente enteras.
 - La tarjeta **no tiene altura fija**: mide lo que necesiten la foto y los textos.
+
 ---
  
 ## 🗄️ Base de datos
@@ -347,6 +393,7 @@ Las rutas están definidas en un `sealed class Navegacion`:
 `Login → Mesas → (abrir mesa) → Elección de platos → Comandas → Detalle → (+) → Elección de platos`
  
 ---
+
  
 ## ▶️ Instalación y ejecución
  
@@ -377,8 +424,9 @@ Durante el desarrollo de este proyecto se ha utilizado **Claude** (Anthropic) co
 - **Detección y corrección de errores** de compilación y de ejecución.
 - **Optimización y refactorización de código**, para hacerlo más limpio y reutilizable.
 - **Estructuración y redacción de este README**, organizando la documentación del proyecto en apartados.
+
 La idea de la aplicación, su diseño y la estructura del proyecto son propios. El código sugerido por la IA se ha revisado, comprendido y adaptado al proyecto.
- 
+
 ---
  
 <p align="center">Hecho con ☕ y Kotlin por <b>Jacqueline E. Díaz Hadjar</b></p>
