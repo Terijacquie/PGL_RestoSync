@@ -2,6 +2,7 @@ package com.example.pgl_restosync.ViewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.pgl_restosync.Model.Local.AuxiliarDetalleComanda
 import com.example.pgl_restosync.Model.Local.CategoriaEntity
 import com.example.pgl_restosync.Model.Local.ComandaEntity
 import com.example.pgl_restosync.Model.Local.MesaEntity
@@ -9,6 +10,7 @@ import com.example.pgl_restosync.Model.Local.PlatoEntity
 import com.example.pgl_restosync.Model.Local.ResumenComanda
 import com.example.pgl_restosync.Model.RestauranteRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -113,4 +115,9 @@ class ViewModelRestaurante(
             repository.eliminarComanda(comanda)
         }
     }
+
+    // 11. Para la pantalla del detalle: lineas de la comanda activa de una mesa
+    fun detalleComanda(mesaId: Int): Flow<List<AuxiliarDetalleComanda>> =
+        repository.obtenerResumenComanda(mesaId)
+
 }

@@ -20,12 +20,15 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -61,6 +64,7 @@ import com.example.pgl_restosync.ui.theme.PGL_RestoSyncTheme
 fun HomeScreen(
     viewModel: ViewModelRestaurante,
     onMesaAbierta: (Int) -> Unit = {},
+    onCerrarSesion: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val listaMesas by viewModel.mesas.collectAsState()
@@ -86,6 +90,15 @@ fun HomeScreen(
         topBar = {
             TopAppBar(
                 title = { Text("¡Hola! ¿Qué mesa vamos a servir?") },
+                actions = {
+                    IconButton(onClick = onCerrarSesion) {
+                        Icon(
+                            Icons.AutoMirrored.Filled.Logout,
+                            contentDescription = "Cerrar sesión",
+                            tint = Color.White
+                        )
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = colorResource(R.color.restosycn_primary)
                         .copy(alpha = 0.5f),
@@ -123,6 +136,8 @@ fun HomeScreen(
             onConfirmar = { comensales ->
                 viewModel.abrirMesa(mesa.id, comensales)
                 mesaSeleccionada = null
+                //Arreglado problema de que al dar confirmar, no abre la siguiente pantalla automaticamente
+                onMesaAbierta(mesa.id)
             },
             onCancelar = {
                 mesaSeleccionada = null
@@ -141,7 +156,7 @@ fun TarjetaMesa(
         onClick = onClick,
         modifier = Modifier.aspectRatio(1f),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
+        colors = cardColors(
             // si esta abierta, semitransparente, si esta cerrado, color solido
             containerColor = if (mesa.isOpen) colorBase.copy(alpha = 0.5f) else colorBase)
     ) {

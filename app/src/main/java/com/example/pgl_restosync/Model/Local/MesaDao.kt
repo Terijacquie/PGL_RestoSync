@@ -16,9 +16,13 @@ interface MesaDao {
     @Query("UPDATE mesas SET isOpen = :isOpen, comensales = :comensales WHERE id = :mesaId")
     suspend fun actualizarEstadoMesa(mesaId: Int, isOpen: Boolean, comensales: Int)
 
+    @Query("SELECT numero FROM mesas WHERE id = :mesaId")
+    suspend fun obtenerNumeroMesa(mesaId: Int): String?
+
     //3. Insertamos las mesas
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertarMesas(mesas: MesaEntity)
+
 
     @Query("DELETE FROM mesas")
     suspend fun deleteAllMesas()

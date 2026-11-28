@@ -75,6 +75,8 @@ class RestauranteRepository(
         //comandaDao.deleteAllComandaDetalle()
     }
 
+    suspend fun obtenerNumeroMesa(mesaId: Int): String? = mesaDao.obtenerNumeroMesa(mesaId)
+
     //27/11/2026
     // Lista de comandas para la pantalla del resumen
     val resumenComanda: Flow<List<ResumenComanda>> = comandaDao.obtenerResumenComandas()
@@ -125,11 +127,5 @@ class RestauranteRepository(
         platoDao.insertarPlatos(PlatoEntity(id = 11, nombre = "Estrella Galicia 1/3", precio = 2.99, categoriaId = 6))
         platoDao.insertarPlatos(PlatoEntity(id = 12, nombre = "Estrella Galicia 0,0", precio = 4.99, categoriaId = 6))
 
-
-
-
-
-
     }
-
 }

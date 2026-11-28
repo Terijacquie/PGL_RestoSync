@@ -36,13 +36,19 @@ interface ComandaDao {
 
     //3. Consultar los platos y cantidades de la comanda de una mesa
     // Esta es la consulta más larga
+    // Cambio en la consulta para que cuando se añadan platos, no se añadan mas filas a la columna, si no que cuente la cantidad total de cada uno por id
     @Query(
         """
-        SELECT d.id AS id, p.nombre AS platoNombre, p.precio, d.cantidad
+        SELECT MIN(d.id) AS id,
+            p.nombre AS platoNombre,
+            p.precio AS precio,
+            SUM(d.cantidad) AS cantidad
         FROM comanda_detalle d
         INNER JOIN comandas c ON d.comandaId = c.id
         INNER JOIN platos p ON d.platoId = p.id
         WHERE c.mesaId = :mesaId AND c.isActiva = 1
+        GROUP BY p.id
+        ORDER BY MIN(d.id)
         """
     )
     fun obtenerDetalleComanda(mesaId: Int): Flow<List<AuxiliarDetalleComanda>>
@@ -66,7 +72,7 @@ interface ComandaDao {
     //27/11/2026
     // Query de consulta de comandas con el nombre de su mesa con JOIN. Primero ponemos las activas y luego las recientes.
     @Query("""
-        SELECT c.id AS comandaID,
+        SELECT c.id AS comandaId,
         c.mesaId AS mesaId,
         m.numero AS numeroMesa,
         c.isActiva AS isActiva

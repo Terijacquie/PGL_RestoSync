@@ -46,7 +46,10 @@ import com.example.pgl_restosync.R
 import com.example.pgl_restosync.ui.theme.PGL_RestoSyncTheme
 
 @Composable
-fun PantallaInicio(modifier: Modifier = Modifier) {
+fun PantallaInicio(
+    onLogin: () -> Unit = {},
+    modifier: Modifier = Modifier
+) {
     var usuario by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Box(modifier = Modifier.fillMaxSize()) {
@@ -85,7 +88,7 @@ fun PantallaInicio(modifier: Modifier = Modifier) {
         OutlinedTextField(
             value = usuario,
             onValueChange = { usuario = it },
-            label = { Text("Email") },
+            label = { Text("Pulse iniciar sesión") },
             singleLine = true,
             placeholder = { Text("Usuario") },
             modifier = Modifier.padding(bottom = 16.dp),
@@ -116,7 +119,7 @@ fun PantallaInicio(modifier: Modifier = Modifier) {
             value = password,
             singleLine = true,
             onValueChange = { password = it },
-            label = { Text("Password") },
+            label = { Text("Esto es solo un ejemplo") },
             placeholder = { Text("Contraseña") },
             modifier = Modifier.padding(bottom = 16.dp, top = 16.dp),
             colors = OutlinedTextFieldDefaults.colors(
@@ -140,7 +143,7 @@ fun PantallaInicio(modifier: Modifier = Modifier) {
         )
 
         ElevatedButton(
-            onClick = { /*TODO*/ },
+            onClick = onLogin,
             colors = ButtonDefaults.elevatedButtonColors(
                 //color del contenedor
                 containerColor = colorResource(R.color.restosycn_primary),
