@@ -103,6 +103,7 @@ app/src/main/java/com/example/pgl_restosync/
 - `DetalleComandaViewModel` se crea dentro de la ruta del detalle, por lo que solo vive mientras esa pantalla está abierta. Gestiona su estado con un `sealed interface` (`DetalleUiState`).
 - Ambos se crean mediante su **Factory**, que recibe el repositorio guardado en `RestoSyncApp`.
 ### 🔄 Detalle técnico: cambio de categoría con `flatMapLatest`
+**Imporatante: lo puse a parte porque quise que fuese más específico y, aunque la estructura la ideé yo, lo cierto es que a la hora de llevarla a cabo, tuve que consultar a Claude para saber exactamente que debía conectar con qué para que funcionara, ya que cuando lo hice, no funcionaba como yo pensaba que era. 
  
 En la pantalla de elección de platos, al pulsar una categoría del menú lateral, la cuadrícula muestra solo los platos de esa categoría, sin recargar la pantalla ni lanzar la consulta a mano. Esto se consigue con el operador `flatMapLatest` de Kotlin Flow.
  
