@@ -35,11 +35,11 @@
  
 | Inicio de sesión | Mesas | Elección de platos |
 |:---:|:---:|:---:|
-| <img src="capturas/login.png" width="230"/> | <img src="capturas/mesas.png" width="230"/> | <img src="capturas/pedido.png" width="230"/> |
- 
-| Abrir mesa | Resumen de comandas | Detalle de la comanda |
-|:---:|:---:|:---:|
-| <img src="capturas/comensales.png" width="230"/> | <img src="capturas/comandas.png" width="230"/> | <img src="capturas/detalle.png" width="230"/> |
+| <img src="capturas/Inicio.png" width="230"/> | <img src="capturas/Home.png" width="230"/> | <img src="capturas/Pedido.png" width="230"/> |
+
+| Resumen de comandas | Detalle de la comanda |
+|:---:|:---:|
+| <img src="capturas/Resumen.png" width="230"/> | <img src="capturas/Detalle.png" width="230"/> |
  
 ---
  
