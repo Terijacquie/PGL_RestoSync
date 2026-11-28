@@ -210,9 +210,10 @@ Las rutas están definidas en un `sealed class Navegacion`:
 
 Durante el desarrollo de este proyecto se ha utilizado **Claude** (Anthropic) como herramienta de apoyo, en concreto para:
 
-- **Consultas técnicas complejas**, como el diseño de consultas SQL con `JOIN` y `GROUP BY` en Room o la navegación con argumentos en Compose.
+- **Consultas técnicas complejas**, como el diseño de consultas SQL con `JOIN` y `GROUP BY` en Room, la navegación con argumentos en Compose o el uso de `flatMapLatest` para que los platos cambien al seleccionar una categoría (ver [detalle técnico](#-detalle-técnico-cambio-de-categoría-con-flatmaplatest)).
 - **Detección y corrección de errores** de compilación y de ejecución.
 - **Optimización y refactorización de código**, para hacerlo más limpio y reutilizable.
+- **Estructuración y redacción de este README**, organizando la documentación del proyecto en apartados.
 
 La idea de la aplicación, su diseño y la estructura del proyecto son propios. El código sugerido por la IA se ha revisado, comprendido y adaptado al proyecto.
 
