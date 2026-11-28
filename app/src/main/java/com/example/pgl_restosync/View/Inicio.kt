@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.material.icons.Icons
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,8 @@ import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.Markunread
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -52,6 +55,8 @@ fun PantallaInicio(
 ) {
     var usuario by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var recordarUsuario by remember { mutableStateOf(false) }
+
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.background_pantallainicio2),
@@ -141,6 +146,23 @@ fun PantallaInicio(
                 )
             },
         )
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Checkbox(
+                checked = recordarUsuario,
+                onCheckedChange = { recordarUsuario = it },
+                colors = CheckboxDefaults.colors(
+                    checkedColor = colorResource(R.color.restosycn_primary),
+                    uncheckedColor = Color.White,
+                    checkmarkColor = Color.White
+                )
+            )
+            Text(
+                text = "Recordar usuario",
+                color = Color.White
+            )
+        }
 
         ElevatedButton(
             onClick = onLogin,
