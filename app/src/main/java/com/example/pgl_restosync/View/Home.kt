@@ -1,6 +1,6 @@
 package com.example.pgl_restosync.View
 
-
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -89,7 +89,7 @@ fun HomeScreen(
         containerColor = Color.Transparent, // Esto es para que se vea la imagen de atrás
         topBar = {
             TopAppBar(
-                title = { Text("¡Hola! ¿Qué mesa vamos a servir?") },
+                title = { Text(stringResource(R.string.home_titulo)) },
                 actions = {
                     IconButton(onClick = onCerrarSesion) {
                         Icon(
@@ -202,7 +202,7 @@ fun DialogoComensales(
                 onValueChange = { nuevo ->
                     if (nuevo.all { it.isDigit() } && nuevo.length <= 2) texto = nuevo
                 },
-                label = { Text("Número de comensales")},
+                label = { Text(stringResource(R.string.dialogo_comensales_label))},
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )

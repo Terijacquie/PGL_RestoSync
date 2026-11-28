@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -48,7 +49,7 @@ fun ResumenPedidos(
         modifier = Modifier,
         topBar = {
             TopAppBar(
-                title = { Text("Resumen de Pedidos") },
+                title = { Text(stringResource(R.string.resumen_titulo)) },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = colorBase,
                     titleContentColor = Color.White

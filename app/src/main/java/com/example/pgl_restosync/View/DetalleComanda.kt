@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -61,7 +62,7 @@ fun DetalleComandaScreen(
     val colorBase = colorResource(R.color.restosycn_primary)
 
     // El título solo se conoce cuando ya ha cargado
-    val titulo = (uiState as? DetalleUiState.Exito)?.numeroMesa ?: "Comanda"
+    val titulo = (uiState as? DetalleUiState.Exito)?.numeroMesa ?: stringResource(R.string.detalle_titulo_defecto)
 
     Scaffold(
         topBar = {
@@ -136,7 +137,7 @@ fun DetalleComandaScreen(
                     // Mensajito si no hay nada en la comanda
                     Box(modifier = modificadorContenido, contentAlignment = Alignment.Center) {
                         Text(
-                            text = "Aún no hay pedidos",
+                            text = stringResource(R.string.detalle_vacio),
                             style = MaterialTheme.typography.titleLarge,
                             color = Color.Gray
                         )

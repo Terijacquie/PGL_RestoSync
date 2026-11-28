@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PGL_RestoSync</string>
+
+    <string name="home_titulo">¡Hola! ¿Qué mesa vamos a servir?</string>
+    <string name="resumen_titulo">Resumen de Pedidos</string>
+    <string name="detalle_titulo_defecto">Comanda</string>
+
+    <string name="dialogo_comensales_label">Número de comensales</string>
+    <string name="detalle_vacio">Aún no hay pedidos</string>
 </resources>
